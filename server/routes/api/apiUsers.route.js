@@ -14,4 +14,16 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/avatar/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const avatar = await Avatar.findOne({
+      where: { id: Number(id) },
+    });
+    res.status(200).json({ message: 'ok', avatar });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
 module.exports = router;

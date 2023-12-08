@@ -43,6 +43,7 @@ router.post('/login', async (req, res) => {
       avatarId: user.avatarId,
       dreams: user.dreams,
       isAdmin: user.isAdmin,
+      Avatar: user.Avatar,
     };
 
     // сгенерируем jwt токены
@@ -90,6 +91,7 @@ router.post('/register', async (req, res) => {
     // если пользователь с таким login уже есть, возвращаем ошибку
     const foundUser = await User.findOne({
       where: { email },
+      include: Avatar,
     });
     if (foundUser) {
       return res
@@ -107,16 +109,11 @@ router.post('/register', async (req, res) => {
       isAdmin: false,
       dreams,
     });
-
-    const userData = {
-      id: user.id,
-      name: user.name,
-      lastName: user.lastName,
-      email: user.email,
-      avatarId: user.avatarId,
-      dreams: user.dreams,
-      isAdmin: user.isAdmin,
-    };
+    const userData = await User.findOne({
+      where: { id: user.id },
+      include: Avatar,
+    });
+    console.log(userData, '--------');
 
     return res.json({
       success: true,

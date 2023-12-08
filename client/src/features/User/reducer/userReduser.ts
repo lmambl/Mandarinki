@@ -1,7 +1,7 @@
 import type { Action } from './action';
 import type { State } from './reducerType';
 
-export const init: State = { users: [], games: [] };
+export const init: State = { users: [], people: null };
 
 const userReducer = (state: State = init, action: Action): State => {
   switch (action.type) {
@@ -10,10 +10,10 @@ const userReducer = (state: State = init, action: Action): State => {
         ...state,
         users: action.payload,
       };
-    case 'games/init':
+    case 'people/init':
       return {
         ...state,
-        games: action.payload,
+        people: action.payload,
       };
 
     default:

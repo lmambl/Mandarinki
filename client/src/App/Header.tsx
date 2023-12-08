@@ -29,21 +29,9 @@ export default function Header(): JSX.Element {
               </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-gray-200">
-                About
-              </a>
+              <Link to="/users"> Users</Link>
             </li>
-            <li>
-              <a href="#" className="hover:text-gray-200">
-                Services
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-gray-200">
-                Contact
-              </a>
-            </li>
-            <li></li>
+            <li>{user && <Link to="/myCard"> MyCard</Link>}</li>
           </ul>
         </nav>
         {user ? (

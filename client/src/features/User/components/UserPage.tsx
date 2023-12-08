@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, type RootState } from '../../../store';
+
 import GiftCard from './GiftCard';
 import * as api from '../api';
 
@@ -14,6 +15,17 @@ function UserPage(): JSX.Element {
     api.peopleFethInit().then((data) => dispatch({ type: 'people/init', payload: data }))
     console.log(user);
 
+    if (user) {
+      fetch(`/api/users/avatar/${user!.avatarId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message === 'ok') {
+            dispatch({ type: 'user/addavatar', payload: data.avatar.url });
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user]);
   },[])
   return (
     <div className="container">
@@ -23,6 +35,7 @@ function UserPage(): JSX.Element {
           <div className="flex items-center justify-center h-40">
             <img
               className="w-30 h-30  object-cover rounded-full border-4 border-red-200"
+
               src={`${user.Avatar.url}`}
               alt="User Avatar"
             />
@@ -36,6 +49,7 @@ function UserPage(): JSX.Element {
           </div>
           <button type="button">Редактировать</button>
         </div>
+
       )}
     </div>
   );

@@ -115,6 +115,7 @@ router.post('/register', async (req, res) => {
       email: user.email,
       avatarId: user.avatarId,
       dreams: user.dreams,
+      isAdmin: user.isAdmin,
     };
 
     return res.json({

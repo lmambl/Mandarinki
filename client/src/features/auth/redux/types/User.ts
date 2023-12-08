@@ -3,7 +3,7 @@ type User = {
   name: string;
   lastName: string;
   email: string;
-  avatadId: number;
+  avatarId: number|string;
   dreams: string;
   isAdmin: boolean;
 };

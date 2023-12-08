@@ -8,6 +8,7 @@ import { useAppDispatch } from '../store';
 import type User from '../features/auth/redux/types/User';
 import MainPage from '../features/MainPage/MainPage';
 import UserList from '../features/User/components/UsersList';
+import UserPage from '../features/User/components/UserPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -30,6 +31,7 @@ function App(): JSX.Element {
         <Route path="/users" element={<UserList />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path='myCard' element={<UserPage />} />
       </Route>
     </Routes>
   );

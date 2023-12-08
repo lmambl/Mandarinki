@@ -18,6 +18,11 @@ function reducer(state: AuthState = initState, action: AuthAction): AuthState {
         ...state,
         user: null,
       };
+    case 'user/addavatar':
+      return (state.user ? {
+        ...state,
+        user: {...state.user, avatarId:action.payload},
+      } : state);
     default:
       return state;
   }

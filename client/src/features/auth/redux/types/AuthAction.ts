@@ -7,6 +7,10 @@ type AuthAction =
     }
   | {
       type: 'user/logout';
+    }
+  | {
+      type: 'user/addavatar';
+      payload: string;
     };
 
 export default AuthAction;

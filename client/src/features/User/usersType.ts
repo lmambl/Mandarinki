@@ -6,4 +6,8 @@ export type User = {
   avatarId: string;
   dreams: string;
   isAdmin: boolean;
+  Avatar:Avatar
 };
+export type Avatar ={
+  url:string
+}

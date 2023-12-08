@@ -21,6 +21,7 @@ function verifyRefreshToken(req, res, next) {
         lastName: user.lastName,
         email: user.email,
         avatarId: user.avatarId,
+        Avatar: user.Avatar,
       },
     });
 

@@ -31,7 +31,9 @@ router.get('/', async (req, res) => {
         console.log(result, '----');
     const games = await Game.findAll();
     console.log(games, '<<<<<<<<');
+    
     res.status(200).json({ message: 'ok', games });
+
   } catch ({ message }) {
     res.status(500).json({ message });
   }

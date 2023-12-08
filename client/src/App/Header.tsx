@@ -24,9 +24,9 @@ export default function Header(): JSX.Element {
         <nav>
           <ul className="flex space-x-4">
             <li>
-              <a href="#" className="hover:text-gray-200">
+              <Link to="/" className="hover:text-gray-200">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#" className="hover:text-gray-200">
@@ -43,9 +43,7 @@ export default function Header(): JSX.Element {
                 Contact
               </a>
             </li>
-            <li>
-             
-            </li>
+            <li></li>
           </ul>
         </nav>
         {user ? (

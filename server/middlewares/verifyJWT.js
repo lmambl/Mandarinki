@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const generateTokens = require('../utils/authUtils');
-const jwtConfig = require('../config/jwtConfig')
+const jwtConfig = require('../config/jwtConfig');
 
 // логика проверки refresh token
 function verifyRefreshToken(req, res, next) {
@@ -15,7 +15,13 @@ function verifyRefreshToken(req, res, next) {
 
     // сгенерируем  новые jwt токены
     const { accessToken, refreshToken } = generateTokens({
-      user: { id: user.id, name: user.name, email: user.email },
+      user: {
+        id: user.id,
+        name: user.name,
+        lastName: user.lastName,
+        email: user.email,
+        avatarId: user.avatarId,
+      },
     });
 
     // Возвращаем токены в httpOnly cookie при ответе

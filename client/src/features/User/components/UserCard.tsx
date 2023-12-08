@@ -13,12 +13,6 @@ function UserCard({ user }: { user: any }): JSX.Element {
         <div className="p-4">
           <div className="text-center mt-1">
             <p className="text-lg font-semibold text-gray-800 mb-2">{`${user.name} ${user.lastName}`}</p>
-            <p className="text-sm text-gray-600 mb-2">Wishlist:</p>
-            <ul className="text-xs text-gray-700 mb-2">
-              <li className="mb-1">&#127873; {user.dreams}</li>
-              <li className="mb-1">&#127873; Item 2</li>
-              <li className="mb-1">&#127873; Item 3</li>
-            </ul>
           </div>
         </div>
       </div>

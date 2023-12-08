@@ -91,8 +91,6 @@ router.post('/register', async (req, res) => {
     // если пользователь с таким login уже есть, возвращаем ошибку
     const foundUser = await User.findOne({
       where: { email },
-      include: Avatar,
-      raw: true,
     });
     if (foundUser) {
       return res

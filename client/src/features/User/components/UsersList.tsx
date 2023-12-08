@@ -9,6 +9,7 @@ function UserList(): JSX.Element {
   const dispatch = useAppDispatch();
   const users = useSelector((store: RootState) => store.userReducer.users);
   const user = useSelector((store: RootState) => store.authReducer.user);
+
   useEffect(() => {
     api
       .userFethInit()
@@ -19,14 +20,25 @@ function UserList(): JSX.Element {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    api
+      .gamesFethInit()
+      .then((data) => {
+        console.log(data);
+        dispatch({ type: 'games/init', payload: data.games });
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <>
       {user &&
         (user.isAdmin ? (
           <>
-            <a href="#" className="hover:text-gray-200">
+            <button type="button" className="hover:text-gray-200" onClick={()=> api.gamesFethInit()}>
               Разыграть
-            </a>
+            </button>
             <p>{users.length}</p>
           </>
         ) : (

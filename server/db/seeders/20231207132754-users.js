@@ -1,0 +1,142 @@
+const bcrypt = require('bcrypt');
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface) {
+    await queryInterface.bulkInsert(
+      'Users',
+      [
+        {
+          name: 'Roma',
+          lastName: 'Doe',
+          email: 'roma@mail.ru',
+          dreams: 'Хочу на НГ улететь в Тайланд и чиллить там всю зиму',
+          password: await bcrypt.hash('123', 10),
+          avatarId: 1,
+          isAdmin: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'Alina',
+          lastName: 'Doe',
+          email: 'alina@mail.ru',
+          dreams: 'Хочу на НГ улететь в Тайланд и чиллить там всю зиму',
+          password: await bcrypt.hash('123', 10),
+          avatarId: 2,
+          isAdmin: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'Jane',
+          lastName: 'Smith',
+          email: 'smith@mail.ru',
+          dreams: 'Мечтаю стать профессиональным фотографом',
+          password: await bcrypt.hash('123', 10),
+          avatarId: 3,
+          isAdmin: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'Alex',
+          lastName: 'Johnson',
+          email: 'ajohnson@mail.ru',
+          dreams: 'Хочу освоить иностранный язык и путешествовать по всему миру',
+          password: await bcrypt.hash('123', 10),
+          avatarId: 2,
+          isAdmin: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'Emily',
+          lastName: 'Brown',
+          email: 'ebrown@mail.ru',
+          dreams: 'Мечтаю открыть свой ресторан и стать известным шеф-поваром',
+          password: await bcrypt.hash('123', 10),
+          avatarId: 3,
+          isAdmin: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'Michael',
+          lastName: 'Wilson',
+          email: 'mwilson@mail.ru',
+          dreams: 'Хочу стать профессиональным музыкантом и записать свой альбом',
+          password: await bcrypt.hash('123', 10),
+          avatarId: 1,
+          isAdmin: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'Sophia',
+          lastName: 'Jones',
+          email: 'sjones@mail.ru',
+          dreams: 'Мечтаю построить свой собственный дом на берегу океана',
+          password: await bcrypt.hash('123', 10),
+          avatarId: 2,
+          isAdmin: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'Daniel',
+          lastName: 'Taylor',
+          email: 'dtaylor@mail.ru',
+          dreams: 'Хочу основать свой собственный стартап и стать миллионером',
+          password: await bcrypt.hash('123', 10),
+          avatarId: 3,
+          isAdmin: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'Olivia',
+          lastName: 'Clark',
+          email: 'oclark@mail.ru',
+          dreams: 'Мечтаю стать известной актрисой и сняться в голливудском фильме',
+          password: await bcrypt.hash('123', 10),
+          avatarId: 1,
+          isAdmin: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'William',
+          lastName: 'Anderson',
+          email: 'wanderson@mail.ru',
+          dreams: 'Хочу побывать на Международной космической станции',
+          password: await bcrypt.hash('123', 10),
+          avatarId: 2,
+          isAdmin: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'Ava',
+          lastName: 'Martinez',
+          email: 'amartinez@mail.ru',
+          dreams: 'Мечтаю стать успешным писателем и выпустить свою книгу',
+          password: await bcrypt.hash('123', 10),
+          avatarId: 1,
+          isAdmin: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      {},
+    );
+  },
+
+  async down() {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
+  },
+};

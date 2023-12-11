@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { useDispatch } from 'react-redux';
 
 // импортируем наши редьюсеры
-import authReducer from './features/auth/redux/reducer';
+import authReducer from './features/Auth/redux/reducer';
 import userReducer from './features/User/reducer/userReduser';
 
 //  комбинируем редьюсеры в один rootReducer

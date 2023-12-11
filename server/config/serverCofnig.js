@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const verifyAccessToken = require('../middleware/verifyJWT');
 
 function serverConfig(app) {
   // чтобы у объекта res и req появились методы cookie
@@ -9,7 +10,7 @@ function serverConfig(app) {
 
   // настройки для сервера, чтобы при отправке формы появлялось req.body
   app.use(express.urlencoded({ extended: true }));
-
+  app.use(verifyAccessToken);
   // учу сервер читать json
   app.use(express.json());
 

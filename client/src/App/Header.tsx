@@ -1,17 +1,18 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, type RootState } from '../store';
 
 export default function Header(): JSX.Element {
   const user = useSelector((store: RootState) => store.authReducer.user);
-
+const navigate= useNavigate()
   const dispatch = useAppDispatch();
 
   const handleLogout = async (): Promise<void> => {
     const response = await fetch('/api/auth/logout');
     if (response.ok) {
       dispatch({ type: 'user/logout' });
+       navigate('/')
     }
   };
 

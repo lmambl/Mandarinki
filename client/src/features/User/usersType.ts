@@ -9,5 +9,6 @@ export type User = {
   Avatar:Avatar
 };
 export type Avatar ={
+  id:number;
   url:string
 }

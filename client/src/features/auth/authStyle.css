@@ -1,0 +1,30 @@
+.formFlex{
+    display: flex;
+}
+.avatarCont{
+    display: flex;
+    flex-wrap: wrap;
+}
+.avatar{
+    width: 100px;
+    height: 100px;
+}
+.blue{
+    background-color:cyan;
+    border-radius: 20px;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.con{
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.podCon{
+    width: 400px;
+}

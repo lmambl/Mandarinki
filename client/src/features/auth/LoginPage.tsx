@@ -1,39 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
+import type { RootState} from '../../store';
 import { useAppDispatch } from '../../store';
-import type User from './redux/types/User';
+import * as api from './api'
 
 export default function LoginPage(): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+const {err,user} = useSelector((store:RootState)=>store.authReducer)
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
+  useEffect(()=>{
+if(user){
+  navigate('/')
+}
+  },[user])
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    fetch('/api/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data);
-        // нужно положить пользователя в стейт
-        const userData: User = data.user;
-
-        // если все успешно, кладем юзера в стор
-        dispatch({ type: 'user/login', payload: userData });
-        // и отправляем на главную страницу
-        navigate('/');
-      })
+api.loginFetch({password,email})
+      .then((data) => { dispatch({ type: 'user/login', payload: data })})
       .catch((err) => console.log(err));
   };
 
@@ -77,6 +65,7 @@ export default function LoginPage(): JSX.Element {
               Войти
             </button>
           </div>
+          <div>{err}</div>
         </form>
       </div>
     </div>

@@ -1,39 +1,40 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
+import * as api from './api'
+import { useAppDispatch, type RootState } from '../../store';
+import './authStyle.css'
+import type { Avatar } from './types/authType';
 
 export default function RegisterPage(): JSX.Element {
   const [name, setName] = useState('');
   const [lastName, setlastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [avatarId, setAvatarId] = useState('');
+  const [avatarId, setAvatarId] = useState(1);
   const [dreams, setDreams] = useState('');
-
+const dispatch = useAppDispatch()
   const navigate = useNavigate();
+const {avatars,err} = useSelector((store:RootState)=>store.authReducer)
+
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    fetch('/api/auth/register', {
-      method: 'POST',
-      body: JSON.stringify({
-        name,
-        lastName,
-        email,
-        password,
-        avatarId,
-        dreams,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((resp) => resp.json())
+api.registrationFetch({
+  name,
+  lastName,
+  email,
+  password,
+  avatarId,
+  dreams,
+})
       .then((data) => {
-        console.log(data);
-        // alert('Вы успешно зарегистрировались')
-        // переадресовываем человека на страницу входа
-        navigate('/login');
-        //  тут можно не переадресовывать, а показывать кнопку Войти или что-то другое
+        if(data.success === true){
+          dispatch({type:'user/rega',payload:data})
+           navigate('/login');
+        }else{
+          dispatch({type:'user/rega',payload:data})
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -41,7 +42,8 @@ export default function RegisterPage(): JSX.Element {
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
      
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+        <form className=" formFlex" onSubmit={handleSubmit}>
+          <div className='podCon'>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="login">
               Name
@@ -97,30 +99,28 @@ export default function RegisterPage(): JSX.Element {
           </div>
           <div className="mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-              Avatar
+        
+             (Здесь Вы можете указать свои пожелания по подарку в пределах 1000р)
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="avatarId"
-              type="text"
-              placeholder="AvatarId"
-              value={avatarId}
-              onChange={(e) => setAvatarId(e.target.value)}
-            />
-          </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-              Dreams
-            </label>
-            <input
+            <textarea
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="dreams"
-              type="text"
               placeholder="Dreams"
               value={dreams}
               onChange={(e) => setDreams(e.target.value)}
             />
           </div>
+</div>
+<div className='podCon'>
+          <div className="mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+              Avatar
+            </label>
+            <div className='avatarCont'>
+       {avatars.map((el:Avatar)=><div className={avatarId=== el.id ? 'blue' : 'con'} key={el.id} onClick={()=>setAvatarId(el.id)}><img alt='...' src={el.url} className='avatar'/></div>)}
+       </div>
+          </div>
+  
           <div className="flex items-center justify-between">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -129,6 +129,8 @@ export default function RegisterPage(): JSX.Element {
               Регистрация
             </button>
           </div>
+          </div>
+          <div>{err}</div>
         </form>
       </div>
   );

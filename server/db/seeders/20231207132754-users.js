@@ -6,10 +6,10 @@ module.exports = {
       'Users',
       [
         {
-          name: 'Roma',
-          lastName: 'Doe',
-          email: 'roma@mail.ru',
-          dreams: 'Хочу на НГ улететь в Тайланд и чиллить там всю зиму',
+          name: 'Anya',
+          lastName: 'Anya',
+          email: 'anya@anya.ru',
+          dreams: 'Хочу на НГ улететь',
           password: await bcrypt.hash('123', 10),
           avatarId: 1,
           isAdmin: true,

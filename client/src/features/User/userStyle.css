@@ -1,0 +1,13 @@
+.cont{
+    
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.contUser{
+    height: 80vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
